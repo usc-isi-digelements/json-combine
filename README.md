@@ -1,4 +1,4 @@
-# status-text
+# json-combine
 
 A polymer web component that combines two JSON objects into a single JSON object.
 
