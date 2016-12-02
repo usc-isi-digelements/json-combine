@@ -30,40 +30,26 @@
       test('dataIn1 equals input value', function() {
         expect(component.dataIn1).to.exist;
         expect(component.dataIn1).to.be.an('Object');
-        expect(component.dataIn1.fieldA).to.exist;
-        expect(component.dataIn1.fieldA).to.equal('value1');
-        expect(component.dataIn1.fieldB).to.not.exist;
-        expect(component.dataIn1.fieldC).to.not.exist;
+        expect(component.dataIn1).to.deep.equal({fieldA: 'value1'});
       });
 
       test('dataIn2 equals input value', function() {
         expect(component.dataIn2).to.exist;
         expect(component.dataIn2).to.be.an('Object');
-        expect(component.dataIn2.fieldA).to.exist;
-        expect(component.dataIn2.fieldA).to.equal('value2');
-        expect(component.dataIn2.fieldB).to.exist;
-        expect(component.dataIn2.fieldB).to.equal('value3');
-        expect(component.dataIn2.fieldC).to.exist;
-        expect(component.dataIn2.fieldC).to.equal('value4');
+        expect(component.dataIn2).to.deep.equal({fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'});
       });
 
       test('dataOut is correct', function() {
         expect(component.dataOut).to.exist;
         expect(component.dataOut).to.be.an('Object');
-        expect(component.dataOut.fieldA).to.exist;
-        expect(component.dataOut.fieldA).to.equal('value1');
-        expect(component.dataOut.fieldB).to.exist;
-        expect(component.dataOut.fieldB).to.equal('value3');
+        expect(component.dataOut).to.deep.equal({fieldA: 'value1', fieldB: 'value3'});
       });
 
       test('update dataIn to update dataOut', function() {
         component.dataIn1 = {fieldA: 'value5'};
         expect(component.dataOut).to.exist;
         expect(component.dataOut).to.be.an('Object');
-        expect(component.dataOut.fieldA).to.exist;
-        expect(component.dataOut.fieldA).to.equal('value5');
-        expect(component.dataOut.fieldB).to.exist;
-        expect(component.dataOut.fieldB).to.equal('value3');
+        expect(component.dataOut).to.deep.equal({fieldA: 'value5', fieldB: 'value3'});
       });
     });
   </script>
