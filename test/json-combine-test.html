@@ -51,6 +51,10 @@
         expect(component.dataOut).to.be.an('Object');
         expect(component.dataOut).to.deep.equal({fieldA: 'value5', fieldB: 'value3'});
       });
+
+      test('does not have html content', function() {
+        expect(Polymer.dom(component.root).children.length).to.equal(0);
+      });
     });
   </script>
 </body>
