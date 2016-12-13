@@ -1,16 +1,17 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-A polymer web component that combines two JSON objects into a single JSON object.
+A Polymer Element that combines two JSON objects into a single JSON object.
 
-Example:
-
-    <json-combine
-        data-in1="[[dataIn1]]"
-        data-in2="[[dataIn2]]"
-        data-out="{{dataOut}}"
-        combine-function="[[transform]]">
-    </json-combine>
+### Example
+```html
+<json-combine
+  data-in1="[[dataIn1]]"
+  data-in2="[[dataIn2]]"
+  data-out="{{dataOut}}"
+  combine-function="[[transform]]">
+</json-combine>
+```
 
 @demo demo/index.html
 -->
@@ -22,38 +23,59 @@ Example:
 
       properties: {
         /**
+         * (Required)
+         *
          * JSON input data.  First argument of combine function.
+         *
+         * @type {Object}
          */
         dataIn1: {
           type: Object
         },
 
         /**
+         * (Required)
+         *
          * JSON input data.  Second argument of combine function.
+         *
+         * @type {Object}
          */
         dataIn2: {
           type: Object
         },
 
         /**
+         * (Required)
+         *
          * The function to combine the input data.  Has the following signature:
          * function (dataIn1, dataIn2) { return dataOut; }
+         *
+         * @type {Object}
          */
         combineFunction: {
           type: Object
         },
 
         /**
+         * (Output)
+         *
          * The combined JSON output data.
+         *
+         * @type {Object}
          */
         dataOut: {
           type: Object,
           notify: true,
-          computed: 'combine(dataIn1, dataIn2, combineFunction)'
+          computed: '_combine(dataIn1, dataIn2, combineFunction)'
         }
       },
 
-      combine: function() {
+      /**
+       * Combines the input data into the output data.
+       *
+       * @private
+       */
+      _combine: function() {
         return this.combineFunction(this.dataIn1, this.dataIn2);
       }
     });

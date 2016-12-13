@@ -16,44 +16,44 @@
 
   <script>
     suite('json-combine', function() {
-      var component;
+      var element;
 
       setup(function() {
-        component = fixture('json-combine-fixture');
-        component.dataIn1 = {fieldA: 'value1'};
-        component.dataIn2 = {fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'};
-        component.combineFunction = function(dataIn1, dataIn2) {
+        element = fixture('json-combine-fixture');
+        element.dataIn1 = {fieldA: 'value1'};
+        element.dataIn2 = {fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'};
+        element.combineFunction = function(dataIn1, dataIn2) {
           return {fieldA: dataIn1.fieldA, fieldB: dataIn2.fieldB};
         };
       });
 
       test('dataIn1 equals input value', function() {
-        expect(component.dataIn1).to.exist;
-        expect(component.dataIn1).to.be.an('Object');
-        expect(component.dataIn1).to.deep.equal({fieldA: 'value1'});
+        expect(element.dataIn1).to.exist;
+        expect(element.dataIn1).to.be.an('Object');
+        expect(element.dataIn1).to.deep.equal({fieldA: 'value1'});
       });
 
       test('dataIn2 equals input value', function() {
-        expect(component.dataIn2).to.exist;
-        expect(component.dataIn2).to.be.an('Object');
-        expect(component.dataIn2).to.deep.equal({fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'});
+        expect(element.dataIn2).to.exist;
+        expect(element.dataIn2).to.be.an('Object');
+        expect(element.dataIn2).to.deep.equal({fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'});
       });
 
       test('dataOut is correct', function() {
-        expect(component.dataOut).to.exist;
-        expect(component.dataOut).to.be.an('Object');
-        expect(component.dataOut).to.deep.equal({fieldA: 'value1', fieldB: 'value3'});
+        expect(element.dataOut).to.exist;
+        expect(element.dataOut).to.be.an('Object');
+        expect(element.dataOut).to.deep.equal({fieldA: 'value1', fieldB: 'value3'});
       });
 
       test('update dataIn to update dataOut', function() {
-        component.dataIn1 = {fieldA: 'value5'};
-        expect(component.dataOut).to.exist;
-        expect(component.dataOut).to.be.an('Object');
-        expect(component.dataOut).to.deep.equal({fieldA: 'value5', fieldB: 'value3'});
+        element.dataIn1 = {fieldA: 'value5'};
+        expect(element.dataOut).to.exist;
+        expect(element.dataOut).to.be.an('Object');
+        expect(element.dataOut).to.deep.equal({fieldA: 'value5', fieldB: 'value3'});
       });
 
       test('does not have html content', function() {
-        expect(Polymer.dom(component.root).children.length).to.equal(0);
+        expect(Polymer.dom(element.root).children.length).to.equal(0);
       });
     });
   </script>
