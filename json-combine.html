@@ -91,8 +91,11 @@ A Polymer Element that combines two JSON objects into a single JSON object.
        *
        * @private
        */
-      _combine: function() {
-        return this.combineFunction(this.dataIn1, this.dataIn2);
+      _combine: function(dataIn1, dataIn2, combineFunction) {
+        if(dataIn1 && dataIn2 && combineFunction) {
+          return combineFunction(dataIn1, dataIn2);
+        }
+        return undefined;
       }
     });
   })();
