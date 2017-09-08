@@ -1,7 +1,7 @@
 {
   "name": "json-combine",
   "description": "A Polymer Element that combines two JSON objects into a single JSON object.",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "authors": ["Next Century Corporation"],
   "license": "Apache-2.0",
   "keywords": [

@@ -108,14 +108,9 @@ limitations under the License.
         });
       });
 
-      test('set dataIn1 to undefined does update dataOut', function() {
+      test('set dataIn1 to undefined does set dataOut to undefined', function() {
         element.dataIn1 = undefined;
-        expect(element.dataOut).to.exist;
-        expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({
-          fieldA: '',
-          fieldB: 'value3'
-        });
+        expect(element.dataOut).to.be.undefined;
       });
 
       test('set dataIn1 to null does update dataOut', function() {
@@ -128,14 +123,9 @@ limitations under the License.
         });
       });
 
-      test('set dataIn2 to undefined does update dataOut', function() {
+      test('set dataIn2 to undefined does set dataOut to undefined', function() {
         element.dataIn2 = undefined;
-        expect(element.dataOut).to.exist;
-        expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({
-          fieldA: 'value1',
-          fieldB: ''
-        });
+        expect(element.dataOut).to.be.undefined;
       });
 
       test('set dataIn2 to null does update dataOut', function() {
@@ -174,44 +164,42 @@ limitations under the License.
       });
 
       test('does not have dataIn1', function() {
-        expect(element.dataIn1).to.not.exist;
+        expect(element.dataIn1).to.be.undefined;
       });
 
       test('does not have dataIn2', function() {
-        expect(element.dataIn2).to.not.exist;
+        expect(element.dataIn2).to.be.undefined;
       });
 
       test('does not have combineFunction', function() {
-        expect(element.combineFunction).to.not.exist;
+        expect(element.combineFunction).to.be.undefined;
       });
 
       test('does not have dataOut', function() {
-        expect(element.dataOut).to.not.exist;
+        expect(element.dataOut).to.be.undefined;
       });
 
       test('update dataIn1 does not update dataOut because dataIn2 and combineFunction are undefined', function() {
         element.dataIn1 = {
           fieldA: 'value1'
         };
-        expect(element.dataOut).to.not.exist;
+        expect(element.dataOut).to.be.undefined;
       });
 
       test('update dataIn2 does not update dataOut because dataIn1 and combineFunction are undefined', function() {
         element.dataIn2 = {
           fieldB: 'value2'
         };
-        expect(element.dataOut).to.not.exist;
+        expect(element.dataOut).to.be.undefined;
       });
 
-      test('update combineFunction does update dataOut if dataIn1 and dataIn2 are undefined', function() {
+      test('update combineFunction does not update dataOut because dataIn1 and dataIn2 are undefined', function() {
         element.combineFunction = function(dataIn1, dataIn2) {
           return {
             fieldX: 'valueX'
           };
         };
-        expect(element.dataOut).to.deep.equal({
-          fieldX: 'valueX'
-        });
+        expect(element.dataOut).to.be.undefined;
       });
 
       test('update dataIn1, dataIn2, and combineFunction does update dataOut', function() {
