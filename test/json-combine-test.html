@@ -36,23 +36,38 @@ limitations under the License.
 
       setup(function() {
         element = fixture('json-combine-fixture');
-        element.dataIn1 = {fieldA: 'value1'};
-        element.dataIn2 = {fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'};
+        element.dataIn1 = {
+          fieldA: 'value1'
+        };
+        element.dataIn2 = {
+          fieldA: 'value2',
+          fieldB: 'value3',
+          fieldC: 'value4'
+        };
         element.combineFunction = function(dataIn1, dataIn2) {
-          return {fieldA: dataIn1.fieldA, fieldB: dataIn2.fieldB};
+          return {
+            fieldA: dataIn1 ? dataIn1.fieldA : '',
+            fieldB: dataIn2 ? dataIn2.fieldB : ''
+          };
         };
       });
 
       test('does have dataIn1', function() {
         expect(element.dataIn1).to.exist;
         expect(element.dataIn1).to.be.an('Object');
-        expect(element.dataIn1).to.deep.equal({fieldA: 'value1'});
+        expect(element.dataIn1).to.deep.equal({
+          fieldA: 'value1'
+        });
       });
 
       test('does have dataIn2', function() {
         expect(element.dataIn2).to.exist;
         expect(element.dataIn2).to.be.an('Object');
-        expect(element.dataIn2).to.deep.equal({fieldA: 'value2', fieldB: 'value3', fieldC: 'value4'});
+        expect(element.dataIn2).to.deep.equal({
+          fieldA: 'value2',
+          fieldB: 'value3',
+          fieldC: 'value4'
+        });
       });
 
       test('does have combineFunction', function() {
@@ -63,30 +78,87 @@ limitations under the License.
       test('does have dataOut', function() {
         expect(element.dataOut).to.exist;
         expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({fieldA: 'value1', fieldB: 'value3'});
+        expect(element.dataOut).to.deep.equal({
+          fieldA: 'value1',
+          fieldB: 'value3'
+        });
       });
 
       test('update dataIn1 does update dataOut', function() {
-        element.dataIn1 = {fieldA: 'value5'};
+        element.dataIn1 = {
+          fieldA: 'value5'
+        };
         expect(element.dataOut).to.exist;
         expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({fieldA: 'value5', fieldB: 'value3'});
+        expect(element.dataOut).to.deep.equal({
+          fieldA: 'value5',
+          fieldB: 'value3'
+        });
       });
 
       test('update dataIn2 does update dataOut', function() {
-        element.dataIn2 = {fieldB: 'value5'};
+        element.dataIn2 = {
+          fieldB: 'value5'
+        };
         expect(element.dataOut).to.exist;
         expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({fieldA: 'value1', fieldB: 'value5'});
+        expect(element.dataOut).to.deep.equal({
+          fieldA: 'value1',
+          fieldB: 'value5'
+        });
+      });
+
+      test('set dataIn1 to undefined does update dataOut', function() {
+        element.dataIn1 = undefined;
+        expect(element.dataOut).to.exist;
+        expect(element.dataOut).to.be.an('Object');
+        expect(element.dataOut).to.deep.equal({
+          fieldA: '',
+          fieldB: 'value3'
+        });
+      });
+
+      test('set dataIn1 to null does update dataOut', function() {
+        element.dataIn1 = null;
+        expect(element.dataOut).to.exist;
+        expect(element.dataOut).to.be.an('Object');
+        expect(element.dataOut).to.deep.equal({
+          fieldA: '',
+          fieldB: 'value3'
+        });
+      });
+
+      test('set dataIn2 to undefined does update dataOut', function() {
+        element.dataIn2 = undefined;
+        expect(element.dataOut).to.exist;
+        expect(element.dataOut).to.be.an('Object');
+        expect(element.dataOut).to.deep.equal({
+          fieldA: 'value1',
+          fieldB: ''
+        });
+      });
+
+      test('set dataIn2 to null does update dataOut', function() {
+        element.dataIn2 = null;
+        expect(element.dataOut).to.exist;
+        expect(element.dataOut).to.be.an('Object');
+        expect(element.dataOut).to.deep.equal({
+          fieldA: 'value1',
+          fieldB: ''
+        });
       });
 
       test('update combineFunction does update dataOut', function() {
         element.combineFunction = function(dataIn1, dataIn2) {
-          return {fieldX: 'valueX'};
+          return {
+            fieldX: 'valueX'
+          };
         };
         expect(element.dataOut).to.exist;
         expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({fieldX: 'valueX'});
+        expect(element.dataOut).to.deep.equal({
+          fieldX: 'valueX'
+        });
       });
 
       test('does not have html content', function() {
@@ -118,31 +190,49 @@ limitations under the License.
       });
 
       test('update dataIn1 does not update dataOut because dataIn2 and combineFunction are undefined', function() {
-        element.dataIn1 = {fieldA: 'value1'};
+        element.dataIn1 = {
+          fieldA: 'value1'
+        };
         expect(element.dataOut).to.not.exist;
       });
 
       test('update dataIn2 does not update dataOut because dataIn1 and combineFunction are undefined', function() {
-        element.dataIn2 = {fieldB: 'value2'};
+        element.dataIn2 = {
+          fieldB: 'value2'
+        };
         expect(element.dataOut).to.not.exist;
       });
 
-      test('update combineFunction does not update dataOut because dataIn1 and dataIn2 are undefined', function() {
+      test('update combineFunction does update dataOut if dataIn1 and dataIn2 are undefined', function() {
         element.combineFunction = function(dataIn1, dataIn2) {
-          return {fieldX: 'valueX'};
+          return {
+            fieldX: 'valueX'
+          };
         };
-        expect(element.dataOut).to.not.exist;
+        expect(element.dataOut).to.deep.equal({
+          fieldX: 'valueX'
+        });
       });
 
       test('update dataIn1, dataIn2, and combineFunction does update dataOut', function() {
-        element.dataIn1 = {fieldA: 'value1'};
-        element.dataIn2 = {fieldB: 'value2'};
+        element.dataIn1 = {
+          fieldA: 'value1'
+        };
+        element.dataIn2 = {
+          fieldB: 'value2'
+        };
         element.combineFunction = function(dataIn1, dataIn2) {
-          return {fieldA: dataIn1.fieldA, fieldB: dataIn2.fieldB};
+          return {
+            fieldA: dataIn1.fieldA,
+            fieldB: dataIn2.fieldB
+          };
         };
         expect(element.dataOut).to.exist;
         expect(element.dataOut).to.be.an('Object');
-        expect(element.dataOut).to.deep.equal({fieldA: 'value1', fieldB: 'value2'});
+        expect(element.dataOut).to.deep.equal({
+          fieldA: 'value1',
+          fieldB: 'value2'
+        });
       });
     });
   </script>
