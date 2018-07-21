@@ -9,7 +9,7 @@
     "polymer"
   ],
   "main": "json-combine.html",
-  "homepage": "https://github.com/DigElements/json-combine/",
+  "homepage": "https://github.com/usc-isi-digelements/json-combine/",
   "ignore": [
     "/.*",
     "/test/"
